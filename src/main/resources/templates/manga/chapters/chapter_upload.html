@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Upload Chapter</title>
+</head>
+<body>
+<h1>Upload New Chapter</h1>
+<form th:action="@{/chapter/upload}" method="post" enctype="multipart/form-data">
+    <div>
+        <label for="title">Chapter Title:</label>
+        <input type="text" id="title" name="title" required>
+    </div>
+    <div>
+        <label for="number">Chapter Number:</label>
+        <input type="number" id="number" name="number" required>
+    </div>
+    <div>
+        <label for="manga_id">Manga ID:</label>
+        <input type="number" id="manga_id" name="manga_id" required>
+    </div>
+    <div>
+        <label for="pages">Pages:</label>
+        <input type="file" id="pages" name="pages" multiple required>
+    </div>
+    <div>
+        <button type="submit">Upload</button>
+    </div>
+</form>
+</body>
+</html>

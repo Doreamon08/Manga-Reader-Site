@@ -17,7 +17,6 @@ import java.nio.file.Paths;
 @RequestMapping("/manga")
 public class MangaController {
     private final MangaService mangaService;
-    private static final String UPLOADED_FOLDER = "src/main/resources/static/images/";
 
     public MangaController(MangaService mangaService) {
         this.mangaService = mangaService;
@@ -39,7 +38,7 @@ public class MangaController {
 
     @PostMapping("/upload")
     //todo Также нужно что то сделать с тем, что изображения работают только, если находятся в папке таргет
-    public String handleFileUpload (
+    public String upload (
             @RequestParam("file") MultipartFile file,
             @RequestParam("title") String title,
             @RequestParam("author") String author,

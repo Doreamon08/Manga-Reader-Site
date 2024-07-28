@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Chapter View</title>
+</head>
+<body>
+<h1 th:text="${chapter.title}">Chapter Title</h1>
+<div th:each="page : ${pages}">
+    <p>Page Number: <span th:text="${page.pageNumber}">Page Number</span></p>
+    <img th:src="${page.pageUrl}" alt="Page Image"/>
+</div>
+<div>
+    <a th:if="${pages.hasPrevious()}" th:href="@{|/chapter/${chapter.id}?page=${pages.number - 1}&size=${pages.size}|}">Previous</a>
+    <span>Page <span th:text="${pages.number + 1}">1</span> of <span th:text="${pages.totalPages}">1</span></span>
+    <a th:if="${pages.hasNext()}" th:href="@{|/chapter/${chapter.id}?page=${pages.number + 1}&size=${pages.size}|}">Next</a>
+</div>
+</body>
+</html>

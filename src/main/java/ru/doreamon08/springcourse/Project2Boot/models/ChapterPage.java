@@ -15,13 +15,13 @@ public class ChapterPage {
     private int pageNumber;
 
     @Column(name = "page_url")
-    private int pageUrl;
+    private String pageUrl;
 
     @ManyToOne
     @JoinColumn(name = "chapter_id", referencedColumnName = "id")
     private Chapter chapterOwner;
 
-    public ChapterPage(int pageNumber, int pageUrl, Chapter chapterOwner) {
+    public ChapterPage(int pageNumber, String pageUrl, Chapter chapterOwner) {
         this.pageNumber = pageNumber;
         this.pageUrl = pageUrl;
         this.chapterOwner = chapterOwner;
@@ -46,11 +46,11 @@ public class ChapterPage {
         this.pageNumber = pageNumber;
     }
 
-    public int getPageUrl() {
+    public String getPageUrl() {
         return pageUrl;
     }
 
-    public void setPageUrl(int pageUrl) {
+    public void setPageUrl(String pageUrl) {
         this.pageUrl = pageUrl;
     }
 
