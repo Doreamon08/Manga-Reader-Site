@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Show</title>
+</head>
+<body>
+
+<p th:text="'ID: ' + ${book.getBook_id()}">VALUE</p>
+<p th:text="'NAME: ' + ${book.getName()}">VALUE</p>
+<p th:text="'AUTHOR: ' + ${book.getAuthor()}">VALUE</p>
+<p th:text="'YEAR: ' + ${book.getYear()}">VALUE</p>
+
+
+<p>
+    <div th:if="${book.getOwner() == null}">
+        <span>This book is free. Choose person: </span>
+            <form th:method="PATCH" th:action="@{/books/{id}/assign(id=${book.getBook_id()})}">
+                <select name="personId">
+                    <option th:each="person : ${people}" th:value="${person.getPerson_id()}"
+                            th:text="${person.getName()}">user</option>
+                </select>
+                <input type="submit" value="ASSIGN"/>
+            </form>
+    </div>
+
+<div th:block th:unless="${book.getOwner() == null}">
+
+    <a th:text="'CURRENT OWNER: '">VALUE</a>
+        <a  th:href="@{/people/{id}(id=${person.getId()})}"
+                th:text="${person.getName()}">VALUE</a>
+
+<!--    <a th:href="@{/books/{id}(id=${book.getBook_id()})}"-->
+<!--       th:text="${book.getName()} + ', ' + ${book.getYear()}"-->
+<!--       th:style="${book.isDelay()} ? 'color: red' : 'color: black'"-->
+<!--    >book</a>-->
+
+        <form th:method="PATCH" th:action="@{/books/{id}/free(id=${book.getBook_id()})}">
+            <input type="submit" value="FREE"/>
+        </form>
+    </div>
+</p>
+
+<a th:href="@{/books/{book_id}/edit(book_id=${book.getBook_id()})}">
+  <input type="submit" value="EDIT"/>
+</a>
+
+<form th:method="DELETE" th:action="@{/books/{book_id}(book_id=${book.getBook_id()})}">
+  <input type="submit" value="DELETE"/>
+</form>
+
+</body>
+</html>

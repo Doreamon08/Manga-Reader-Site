@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Manga Details</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            font-size: 24px;
+            color: #333;
+            text-align: center;
+        }
+        .manga-details {
+            margin-top: 20px;
+        }
+        .manga-details p {
+            font-size: 18px;
+            color: #555;
+            line-height: 1.6;
+        }
+        .manga-details p span {
+            font-weight: bold;
+            color: #333;
+        }
+        .manga-image {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .manga-image img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Manga Details</h1>
+    <div class="manga-details">
+        <p><span>ID:</span> <span th:text="${manga.getId()}">VALUE</span></p>
+        <p><span>Title:</span> <span th:text="${manga.getTitle()}">VALUE</span></p>
+        <p><span>Author:</span> <span th:text="${manga.getAuthor()}">VALUE</span></p>
+        <p><span>Description:</span> <span th:text="${manga.getDescription()}">VALUE</span></p>
+    </div>
+    <div class="manga-image">
+        <img th:src="@{${manga.linkToPreviewImage}}" alt="Preview Image"/>
+    </div>
+</div>
+
+</body>
+</html>

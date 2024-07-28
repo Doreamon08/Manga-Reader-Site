@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Upload</title>
+</head>
+<body>
+<h2>Upload an Image</h2>
+
+<form method="POST" enctype="multipart/form-data" th:action="@{/manga/upload}">
+    <label>Title:</label>
+    <input type="text" name="title"/>
+    <br/>
+    <label>Author:</label>
+    <input type="text" name="author"/>
+    <br/>
+    <label>Description:</label>
+    <input type="text" name="description"/>
+    <br/>
+    <label>File:</label>
+    <input type="file" name="file"/>
+    <br/>
+    <input type="submit" value="Upload"/>
+</form>
+
+<p th:text="${message}"></p>
+
+</body>
+</html>

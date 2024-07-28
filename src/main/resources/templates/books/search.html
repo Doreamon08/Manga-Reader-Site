@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Search</title>
+</head>
+<body>
+
+<!--<form action="/books/search" method="post">-->
+<!--  <label for="book_name">Book name:</label>-->
+<!--  <input type="text" id="book_name" name="book_name" required>-->
+<!--  <button type="submit">Find</button>-->
+<!--</form>-->
+
+<h1>Book Search</h1>
+<form action="/books/search" method="post">
+    <label for="book_name">Enter Book Name:</label>
+    <input type="text" id="book_name" name="book_name" required>
+    <button type="submit">Find</button>
+</form>
+
+<h2>Results:</h2>
+<table>
+    <tr>
+        <th>Book ID</th>
+        <th>Name</th>
+        <th>Author</th>
+        <th>Year</th>
+        <th>Owner</th>
+    </tr>
+    <!-- Loop through the list of books and display them -->
+    <th:block th:each="book : ${books}">
+        <tr>
+            <td th:text="${book.book_id}"></td>
+            <td th:text="${book.name}"></td>
+            <td th:text="${book.author}"></td>
+            <td th:text="${book.year}"></td>
+            <td th:text="${book.owner.name}"></td>
+        </tr>
+    </th:block>
+</table>
+
+</body>
+</html>
