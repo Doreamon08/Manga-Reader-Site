@@ -2,17 +2,107 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Chapter View</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        .page-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .page-number {
+            font-size: 18px;
+            color: #666;
+            margin-bottom: 10px;
+        }
+
+        .page-image {
+            max-width: 100%;
+            max-height: 500px;
+            width: auto;
+            height: auto;
+            border: 1px solid #ccc;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+        }
+
+        .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        .pagination a {
+            text-decoration: none;
+            color: #007bff;
+            padding: 8px 16px;
+            margin: 0 5px;
+            border: 1px solid #007bff;
+            border-radius: 4px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .pagination a:hover {
+            background-color: #007bff;
+            color: #fff;
+        }
+
+        .pagination span {
+            font-size: 16px;
+            margin: 0 10px;
+        }
+    </style>
+    <script type="text/javascript">
+        function goToPreviousPage(chapterId, currentPage, size) {
+            const prevPage = currentPage - 1;
+            if (prevPage >= 0) {
+                window.location.href = `/chapter/${chapterId}?page=${prevPage}&size=${size}`;
+            }
+        }
+
+        function goToNextPage(chapterId, currentPage, totalPages, size) {
+            const nextPage = currentPage + 1;
+            if (nextPage < totalPages) {
+                window.location.href = `/chapter/${chapterId}?page=${nextPage}&size=${size}`;
+            }
+        }
+
+        function handleImageClick(event, chapterId, currentPage, totalPages, size) {
+            console.log("Image clicked!");
+            console.log("Current page:", currentPage);
+            console.log("Total pages:", totalPages);
+            if (event.clientX < window.innerWidth / 2) {
+                goToPreviousPage(chapterId, currentPage, size);
+            } else {
+                goToNextPage(chapterId, currentPage, totalPages, size);
+            }
+        }
+    </script>
 </head>
 <body>
 <h1 th:text="${chapter.title}">Chapter Title</h1>
-<div th:each="page : ${pages}">
-    <p>Page Number: <span th:text="${page.pageNumber}">Page Number</span></p>
-    <img th:src="${page.pageUrl}" alt="Page Image"/>
+<div class="page-container" th:each="page : ${pages}">
+    <p class="page-number">Page Number: <span th:text="${page.pageNumber}">Page Number</span></p>
+    <img th:src="${page.pageUrl}" alt="Page Image" class="page-image" th:onclick="'handleImageClick(event, ' + ${chapter.id} + ', ' + ${pages.number} + ', ' + ${pages.totalPages} + ', ' + ${pages.size} + ');'"/>
 </div>
-<div>
+<div class="pagination">
     <a th:if="${pages.hasPrevious()}" th:href="@{|/chapter/${chapter.id}?page=${pages.number - 1}&size=${pages.size}|}">Previous</a>
     <span>Page <span th:text="${pages.number + 1}">1</span> of <span th:text="${pages.totalPages}">1</span></span>
     <a th:if="${pages.hasNext()}" th:href="@{|/chapter/${chapter.id}?page=${pages.number + 1}&size=${pages.size}|}">Next</a>
 </div>
 </body>
 </html>
+

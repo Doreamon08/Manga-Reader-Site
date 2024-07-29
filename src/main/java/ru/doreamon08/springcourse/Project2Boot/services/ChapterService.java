@@ -10,6 +10,8 @@ import ru.doreamon08.springcourse.Project2Boot.models.ChapterPage;
 import ru.doreamon08.springcourse.Project2Boot.repositories.ChapterPageRepository;
 import ru.doreamon08.springcourse.Project2Boot.repositories.ChapterRepository;
 
+import java.util.List;
+
 @Service
 public class ChapterService {
 
@@ -35,4 +37,11 @@ public class ChapterService {
         chapterRepository.save(chapter);
         chapterPageRepository.saveAll(chapter.getPages());
     }
+
+    public List<Chapter> findChapters(int mangaId) {
+
+        return chapterRepository.findChapterByMangaOwnerId(mangaId);
+
+    }
+
 }

@@ -44,6 +44,29 @@
             height: auto;
             border-radius: 10px;
         }
+        .chapter-list {
+            margin-top: 20px;
+        }
+        .chapter-list h2 {
+            font-size: 20px;
+            color: #333;
+        }
+        .chapter-list ul {
+            list-style: none;
+            padding: 0;
+        }
+        .chapter-list ul li {
+            font-size: 18px;
+            color: #555;
+            padding: 5px 0;
+        }
+        .chapter-list ul li a {
+            text-decoration: none;
+            color: #007BFF;
+        }
+        .chapter-list ul li a:hover {
+            text-decoration: underline;
+        }
     </style>
 </head>
 <body>
@@ -59,7 +82,17 @@
     <div class="manga-image">
         <img th:src="@{${manga.linkToPreviewImage}}" alt="Preview Image"/>
     </div>
+    <div class="chapter-list">
+        <h2>Chapters</h2>
+        <ul>
+            <li th:each="chapter : ${chapters}">
+                <a th:href="@{'/chapter/' + ${chapter.id}}"
+                   th:text="${chapter.title}">Chapter Title</a>
+            </li>
+        </ul>
+    </div>
 </div>
 
 </body>
 </html>
+

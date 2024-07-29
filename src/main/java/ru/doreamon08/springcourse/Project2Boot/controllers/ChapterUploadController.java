@@ -50,7 +50,7 @@ public class ChapterUploadController {
             ChapterPage chapterPage = new ChapterPage();
             chapterPage.setPageNumber(i + 1);
             // Предположим, что у вас есть метод для сохранения файла и получения URL
-            String pageUrl = FileSaver.handleFileUpload(page, model, "src/main/resources/static/images/chapters/");
+            String pageUrl = FileSaver.handleFileUpload(page, model, "src/main/resources/static/images/chapters/", "/images/chapters/");
             chapterPage.setPageUrl(pageUrl);
             chapterPage.setChapterOwner(chapter);
             chapterPages.add(chapterPage);

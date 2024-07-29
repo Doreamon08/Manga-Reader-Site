@@ -10,7 +10,7 @@ import java.nio.file.Paths;
 
 public class FileSaver {
 
-    public static String handleFileUpload(MultipartFile file, Model model, String uploadedFolder) {
+    public static String handleFileUpload(MultipartFile file, Model model, String uploadedFolder, String folder) {
 
         try {
             Path uploadPath = Paths.get(uploadedFolder);
@@ -24,7 +24,7 @@ public class FileSaver {
 
             model.addAttribute("message", "You successfully uploaded '" + file.getOriginalFilename() + "'");
 
-            return ("/images/" + file.getOriginalFilename());
+            return (folder + file.getOriginalFilename());
         } catch (IOException e) {
             e.printStackTrace();
             model.addAttribute("message", "Failed to upload '" + file.getOriginalFilename() + "'");

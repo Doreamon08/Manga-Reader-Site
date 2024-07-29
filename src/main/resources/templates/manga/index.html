@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Books</title>
+    <style>
+        .manga-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+        }
+        .manga-item {
+            border: 1px solid #ccc;
+            padding: 16px;
+            text-align: center;
+        }
+        .manga-item img {
+            width: 100px; /* задайте нужную ширину */
+            height: 150px; /* задайте нужную высоту */
+            object-fit: cover; /* изображение будет обрезано по центру, чтобы соответствовать заданным размерам */
+            object-position: center;
+        }
+    </style>
+</head>
+
+<body>
+
+<hr>
+<br>
+
+<div class="manga-grid">
+    <div class="manga-item" th:each="m : ${manga}">
+        <a th:href="@{/manga/{id}(id=${m.getId()})}" th:text="${m.getTitle()}">Title</a>
+        <br>
+        <img th:src="${m.getLinkToPreviewImage()}" alt="Preview Image">
+    </div>
+</div>
+
+<br>
+<hr>
+
+</body>
+</html>

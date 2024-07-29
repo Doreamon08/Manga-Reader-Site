@@ -46,6 +46,7 @@ public class PeopleController {
     @PostMapping()
     public String create(@ModelAttribute("person") Person person,
                          BindingResult bindingResult) {
+
         if (bindingResult.hasErrors())
             return "people/new";
 
